@@ -1,0 +1,82 @@
+[
+  {
+    "category": "Funny",
+    "id": 1,
+    "color": "#de1623",
+    "tags": [
+      { "id": 1, "name": "comic" },
+      { "id": 3, "name": "animation" },
+      { "id": 12, "name": "crash video" },
+      { "id": 52, "name": "animal video" },
+      { "id": 32, "name": "animation" },
+      { "id": 23, "name": "trailer" },
+      { "id": 24, "name": "comic" },
+      { "id": 25, "name": "football" },
+      { "id": 26, "name": "tennis" }
+    ]
+  },
+  {
+    "category": "Education",
+    "color": "blue",
+    "id": 2,
+    "tags": [
+      { "id": 1, "name": "comic" },
+      { "id": 3, "name": "animation" },
+      { "id": 12, "name": "crash video" },
+      { "id": 52, "name": "animal video" },
+      { "id": 32, "name": "animation" },
+      { "id": 23, "name": "trailer" },
+      { "id": 24, "name": "comic" },
+      { "id": 25, "name": "football" },
+      { "id": 26, "name": "tennis" }
+    ]
+  },
+  {
+    "category": "Lifehacks",
+    "color": "#414141",
+    "id": 3,
+    "tags": [
+      { "id": 1, "name": "comic" },
+      { "id": 3, "name": "animation" },
+      { "id": 12, "name": "crash video" },
+      { "id": 52, "name": "animal video" },
+      { "id": 32, "name": "animation" },
+      { "id": 23, "name": "trailer" },
+      { "id": 24, "name": "comic" },
+      { "id": 25, "name": "football" },
+      { "id": 26, "name": "tennis" }
+    ]
+  },
+  {
+    "category": "Interesting",
+    "color": "green",
+    "id": 4,
+    "tags": [
+      { "id": 1, "name": "comic" },
+      { "id": 3, "name": "animation" },
+      { "id": 12, "name": "crash video" },
+      { "id": 52, "name": "animal video" },
+      { "id": 32, "name": "animation" },
+      { "id": 23, "name": "trailer" },
+      { "id": 24, "name": "comic" },
+      { "id": 25, "name": "football" },
+      { "id": 26, "name": "tennis" }
+    ]
+  },
+  {
+    "category": "Animation",
+    "color": "orange",
+    "id": 4,
+    "tags": [
+      { "id": 1, "name": "comic" },
+      { "id": 3, "name": "animation" },
+      { "id": 12, "name": "crash video" },
+      { "id": 52, "name": "animal video" },
+      { "id": 32, "name": "animation" },
+      { "id": 23, "name": "trailer" },
+      { "id": 24, "name": "comic" },
+      { "id": 25, "name": "football" },
+      { "id": 26, "name": "tennis" }
+    ]
+  }
+]
