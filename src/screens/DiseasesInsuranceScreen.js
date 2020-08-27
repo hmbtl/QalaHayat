@@ -86,7 +86,7 @@ export default class DiseasesInsuranceScreen extends Component {
                                     {'\u2022 '}Görmə qabiliyyətinin hər iki gözdə tam itirilməsi.{'\n'}
                                     {'\u2022 '}Müasir tibb ilkin mərhələdə müəyyən olunmuş bu xəstəliklərin müayinə və müalicəsində yetərli uğur əldə etmişdir.
                                     {'\n\n'}
-                                    Lakin, sadalanan xəstəliklər nəticəsində müalicə xərclərinin ödənilməsi, həmçinin xəstə olan şəxsinuzun müddət qazancını itirməsi qaçılmazdır. Bu sığorta növü sayəsində ciddi maliyyə problemlərinin qarşısını almaq və xəstəlikdən qurtulmaq üçün sərfəli imkan əldə etmək mümkündür.
+                                    Lakin, sadalanan xəstəliklər nəticəsində müalicə xərclərinin ödənilməsi, həmçinin xəstə olan şəxsin uzun müddət qazancını itirməsi qaçılmazdır. Bu sığorta növü sayəsində ciddi maliyyə problemlərinin qarşısını almaq və xəstəlikdən qurtulmaq üçün sərfəli imkan əldə etmək mümkündür.
                                     {'\n\n'}
                                     Sığorta hadisəsi baş verdiyi halda, sığortalıya ödənilmiş sığorta məbləğinin məhz hansı xərclər üzrə sərf edilməsi ilə bağlı heç bir hesabat tələb olunmur.
                                     {'\n\n'}

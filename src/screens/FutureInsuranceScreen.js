@@ -123,6 +123,16 @@ export default class FutureInsuranceScreen extends Component {
             isFormValid = false;
         }
 
+        const emailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+        if (!fields['email']) {
+            errors['email'] = 'Zəhmət olmasa emailiniz qeyd edin.';
+            isFormValid = false;
+        }else if(!emailRegex.test(fields['email'])) {
+            errors['email'] = 'E-mail səhvdir.';
+            isFormValid = false;
+        }
+
         if (!fields['requestName']) {
             errors['requestName'] = 'Zəhmət olmasa Ad və Soyadınızı qeyd edin.';
             isFormValid = false;
@@ -579,6 +589,16 @@ export default class FutureInsuranceScreen extends Component {
                                         style={styles.inputStyle}
                                         maxLength={9}
                                         error={this.state.errors['phone']}
+                                    />
+
+                                    <QalaInputText
+                                        label="E-mail"
+                                        editable={true}
+                                        value={this.state.fields['email']}
+                                        onChangeText={(text) => { this.onChangeField("email", text) }}
+                                        labelStyle={{ color: colors.primaryDark }}
+                                        style={styles.inputStyle}
+                                        error={this.state.errors['email']}
                                     />
                                     <Text style={styles.belowText}>
                                         Aşağıda yerləşən "Sorğu Göndər" düyməsinə basıb öz müraciətinizi bizə göndərin

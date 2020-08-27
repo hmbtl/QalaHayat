@@ -44,8 +44,8 @@ export default class ProfileScreen extends Component {
       newPasswordInput: "",
       confirmPasswordInput: "",
       modalLoading: false,
-      asanPhoneInput: "506562402",
-      asanUserInput: "240289",
+      asanPhoneInput: "",
+      asanUserInput: "",
       timer: 120,
       user: {
         name: "",
@@ -162,10 +162,12 @@ export default class ProfileScreen extends Component {
           showValidate: false
         })
 
-        Snackbar.show({
-          text: data.message,
-          backgroundColor: '#de1623',
-        });
+        setTimeout(() => {
+          Snackbar.show({
+            text: data.message,
+            backgroundColor: '#de1623',
+          });
+        }, 300)
       } else {
 
         // if success get user from data

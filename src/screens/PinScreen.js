@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, Image, ImageBackground, StatusBar, Alert, Platform, Dimensions } from 'react-native'
+import { Text, StyleSheet, View, Image, ImageBackground, StatusBar, Alert, SafeAreaView, Platform, TouchableOpacity } from 'react-native'
 import FingerprintScanner from 'react-native-fingerprint-scanner';
 import { PinBoard } from "@component/layouts"
 import { Button, PinCircles, Dialog } from "@component/views"
@@ -22,7 +22,9 @@ export default class PinScreen extends Component {
             selectedPin: "",
             isSensorAvailable: true,
             biometryType: "",
-            showModal: false
+            tryCount: 1,
+            showModal: false,
+            lostPasswordModal: false
         }
 
         //let brand = DeviceInfo.getBrand();
@@ -34,6 +36,8 @@ export default class PinScreen extends Component {
         this.onBiometricsCancel = this.onBiometricsCancel.bind(this);
         this.checkAuth = this.checkAuth.bind(this);
         this.setStateWithMount = this.setStateWithMount.bind(this);
+        this.logout = this.logout.bind(this);
+
     }
 
     setStateWithMount = data => {
@@ -41,6 +45,18 @@ export default class PinScreen extends Component {
             this.setState(data);
         }
     };
+
+    logout = async () => {
+        try {
+            await AsyncStorage.removeItem(constants.asyncKeys.user);
+            await AsyncStorage.removeItem(constants.asyncKeys.useBiometrics);
+            await AsyncStorage.removeItem(constants.asyncKeys.showWizardInfo);
+
+            this.props.navigation.navigate('Auth');
+        } catch (exception) {
+            console.log(exception)
+        }
+    }
 
 
     checkAuth = async () => {
@@ -104,9 +120,12 @@ export default class PinScreen extends Component {
                         text: 'Şifrələr uyğun gəlmədi, yenidən cəhd edin.',
                         backgroundColor: '#de1623',
                     });
+
+
                     this.setStateWithMount({
                         selectedPin: "",
-                        pin: ""
+                        pin: "",
+
                     })
                 }
             }
@@ -117,12 +136,24 @@ export default class PinScreen extends Component {
             if (pin === savedPin) {
                 this.props.navigation.navigate("Home")
             } else {
-                Snackbar.show({
-                    text: 'Daxil etdiyiniz şifrə yalnışdır.',
-                    backgroundColor: '#de1623',
-                });
+                let tryCount = this.state.tryCount;
+                let lostPasswordModal = this.state.lostPasswordModal;
+                console.log(tryCount)
+                if (tryCount === 3) {
+                    lostPasswordModal = true;
+                    tryCount = 1;
+                } else {
+                    tryCount++;
+
+                    Snackbar.show({
+                        text: 'Daxil etdiyiniz şifrə yalnışdır.',
+                        backgroundColor: '#de1623',
+                    });
+                }
                 this.setStateWithMount({
-                    pin: ""
+                    pin: "",
+                    tryCount: tryCount,
+                    lostPasswordModal: lostPasswordModal
                 })
             }
         }
@@ -196,7 +227,7 @@ export default class PinScreen extends Component {
         }
 
         return (
-            <View
+            <SafeAreaView
                 style={styles.pinContainer}>
 
                 <PinCircles
@@ -221,7 +252,13 @@ export default class PinScreen extends Component {
                     pin={this.state.pin}
                     onTouchIdPress={() => { this.setState({ showPin: false }) }}
                 />
-            </View>
+                {this.state.action === "auth" &&
+                    <TouchableOpacity
+                        onPress={() => { this.setStateWithMount({ lostPasswordModal: true }) }}
+                    ><Text style={{ fontSize: constants.fonts.small, textAlign: "center", padding: verticalScale(15), color: "white" }}>Şifrəni, unutmusunuz ?</Text>
+                    </TouchableOpacity>
+                }
+            </SafeAreaView>
         )
     }
 
@@ -254,6 +291,20 @@ export default class PinScreen extends Component {
                     content={"Qala Hayat Mobile-a girmək üçün " + this.state.biometryType + " istifadə eləmək istəyirsiniz?"}
                 />
 
+                <Dialog
+                    onOutsidePress={() => { this.setState({ lostPasswordModal: false }) }}
+                    onCancelPress={() => { this.setState({ lostPasswordModal: false }) }}
+                    animationType="fade"
+                    acceptText="Bəli, hesabdan çıx"
+                    cancelText="Bağla"
+                    transparent={true}
+                    visible={this.state.lostPasswordModal}
+                    onAcceptPress={this.logout}
+                    onRequestClose={() => this.setState({ lostPasswordModal: false })}
+                    title="Şifrəni unutmusunuz?"
+                    content={"Əgər, siz şifrənizi unutmusunuzsa hesabdan çıxıb və yenidən daxil ola bilərsiniz."}
+                />
+
 
 
                 <View style={styles.container}>
@@ -278,16 +329,16 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         flexDirection: "column",
-        marginTop: constants.ratio < 1.90 ? (constants.ratio < 1.6 ? moderateScale(30) : moderateScale(20)) : moderateScale(50),
+        marginTop: constants.ratio < 1.93 ? (constants.ratio < 1.6 ? moderateScale(30) : moderateScale(20)) : moderateScale(50),
     },
     image: {
-        marginTop: constants.ratio < 1.90 ? (constants.ratio < 1.6 ? moderateScale(0) : moderateScale(40)) : verticalScale(40),
+        marginTop: constants.ratio < 1.93 ? (constants.ratio < 1.6 ? moderateScale(0) : moderateScale(40)) : verticalScale(40),
         height: verticalScale(130),
     },
     pinContainer: {
         flex: 1,
         alignSelf: "center",
-        marginTop: constants.ratio < 1.90 ? (constants.ratio < 1.6 ? verticalScale(65) : verticalScale(60)) : verticalScale(70)
+        marginTop: constants.ratio < 1.93 ? (constants.ratio < 1.6 ? verticalScale(65) : verticalScale(60)) : verticalScale(70)
     }
 
 

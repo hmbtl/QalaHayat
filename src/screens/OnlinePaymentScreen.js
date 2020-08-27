@@ -25,8 +25,8 @@ export default class OnlinePaymentScreen extends Component {
             contract: null,
             errors: {},
             fields: {
-                fin: "12N0Y77",
-                certificateNumber: "MLI-BS-0000634"
+                fin: "",
+                certificateNumber: ""
             }
         }
 
@@ -99,7 +99,6 @@ export default class OnlinePaymentScreen extends Component {
             errors['certificateNumber'] = "Zəhmət olmasa şəhadətnamə nömrəsin daxil edin"
             isFormValid = false
         }
-
         if (this.state.isFin) {
             if (!fields['fin']) {
                 errors['fin'] = "Zəhmət olmasa FİN-i daxil edin."
@@ -129,8 +128,10 @@ export default class OnlinePaymentScreen extends Component {
                 let data = {};
 
                 if (this.state.isFin) {
+                    console.log("fin");
                     data = await api.getContractByFin(fields['certificateNumber'], fields['fin']);
                 } else {
+                    console.log("voen")
                     data = await api.getContractByVOEN(fields['certificateNumber'], fields['voen']);
                 }
 
@@ -220,7 +221,6 @@ export default class OnlinePaymentScreen extends Component {
 
                         <Text style={styles.sectionHeader}>Sığorta şəhadətnaməsini tapın</Text>
 
-
                         <View style={{ flexDirection: "row", marginBottom: 20, justifyContent: "flex-start" }}>
                             <TouchableHighlight
                                 style={{ flex: 1, marginRight: 5, borderRadius: 3 }} onPress={() => this.setStateWithMount({ isFin: true })}>
@@ -230,18 +230,17 @@ export default class OnlinePaymentScreen extends Component {
                             </TouchableHighlight>
                             <TouchableHighlight style={{ flex: 1, marginLeft: 5, borderRadius: 3 }} onPress={() => this.setStateWithMount({ isFin: false })}>
                                 <View style={[styles.selector, { backgroundColor: !this.state.isFin ? colors.primary : "white" }]}>
-                                    <Text style={{ color: !this.state.isFin ? "white" : colors.primary }}>VOEN ilə axtar</Text>
+                                    <Text style={{ color: !this.state.isFin ? "white" : colors.primary }}>VÖEN ilə axtar</Text>
                                 </View>
                             </TouchableHighlight>
                         </View>
-
 
                         <View style={styles.card}>
                             {this.state.isFin &&
                                 <QalaInputText
                                     label="FİN"
-                                    placeholder="məs. XXXXXXX"
                                     maxLength={7}
+                                    placeholder="məs. XXXXXXX"
                                     autoCapitalize="characters"
                                     value={this.state.fields['fin']}
                                     error={this.state.errors['fin']}
@@ -253,14 +252,14 @@ export default class OnlinePaymentScreen extends Component {
                             }
                             {!this.state.isFin &&
                                 <QalaInputText
-                                    label="VOEN"
-                                    //value={this.state.voen}
-                                    //onChangeText={text => this.setState({ voen: text })}
+                                    label="VÖEN"
+                                    placeholder="məs. XXXXXXXXX"
+                                    autoCapitalize="characters"
                                     value={this.state.fields['voen']}
                                     error={this.state.errors['voen']}
                                     onChangeText={text => this.onChangeField('voen', text)}
+                                    //onChangeText={text => this.setState({ fin: text })}
                                     labelStyle={{ color: colors.primaryDark }}
-                                    autoCapitalize="characters"
                                     style={[styles.inputStyle, { color: colors.blackLight }]}
                                 />
                             }

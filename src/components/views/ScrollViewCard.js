@@ -104,9 +104,15 @@ export default class ScrollViewCard extends Component {
     render() {
         return (
 
+
+
+
+
             <View style={styles.card}>
 
+
                 <ScrollView style={styles.container} showsVerticalScrollIndicator={false}
+                    keyboardDismissMode='on-drag'
                     ref={ref => { this.scrollView = ref }}
                     onScroll={({ nativeEvent }) => {
                         if (this.isCloseToBottom(nativeEvent)) {
@@ -125,6 +131,7 @@ export default class ScrollViewCard extends Component {
                     }}
                     scrollEventThrottle={400}
                 >
+
                     {this.props.children}
                 </ScrollView>
                 {!this.props.hideControl &&
@@ -132,7 +139,9 @@ export default class ScrollViewCard extends Component {
                 {!this.props.hideControl &&
                     this.renderBottomChevron()}
 
-            </View>
+            </View >
+
+
         )
     }
 }

@@ -137,7 +137,7 @@ export default class SettingScreen extends Component {
                 activeOpacity={0.5}
               >
                 <View style={styles.buttionContainer}>
-                  <Text style={styles.sectionButton}>Şifrəni dayişin</Text>
+                  <Text style={styles.sectionButton}>Şifrəni dəyişin</Text>
                   <Image
                     style={styles.chevron}
                     source={images.chevronRight}
@@ -167,7 +167,7 @@ export default class SettingScreen extends Component {
               <View
               >
                 <View style={styles.buttionContainer}>
-                  <Text style={styles.sectionButton}>Biometrics</Text>
+                  <Text style={styles.sectionButton}>Biometrika</Text>
                   <Switch
                     value={this.state.useBiometrics}
                     onValueChange={this.onBiometricsSwitch}

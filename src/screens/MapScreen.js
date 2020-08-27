@@ -5,6 +5,7 @@ import {
   Animated,
   StatusBar,
   Image,
+  Platform,
   Linking,
   TouchableOpacity,
   StyleSheet,
@@ -28,7 +29,6 @@ export default class MapScreen extends Component {
       email: 'office@qala.az',
       latitude: 40.388900,
       longitude: 49.823514,
-      mobile: '0123771010',
       name: 'Baş Ofis',
       isLoading: false,
       allowScroll: false,
@@ -127,29 +127,50 @@ export default class MapScreen extends Component {
             style={{ flex: 1, flexDirection: "row", justifyContent: "flex-end", marginRight: 40 }}
           >
             <View style={{ width: 65, height: 50, alignItems: "center", justifyContent: "center" }}>
-              <Animated.View style={[styles.circle, { backgroundColor: "#5CAED6", height: this.state.circleAnimation, width: this.state.circleAnimation, alignItems: "center", justifyContent: "center" }]} >
-                <Image
-                  source={images.call}
-                  resizeMode="contain"
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => Linking.openURL('tel:1540')}
+              >
+                <Animated.View style={[styles.circle, { backgroundColor: "#5CAED6", height: this.state.circleAnimation, width: this.state.circleAnimation, alignItems: "center", justifyContent: "center" }]} >
+                  <Image
+                    source={images.call}
+                    resizeMode="contain"
 
-                  style={{ flex: 1, margin: 5 }}
-                />
-              </Animated.View>
+                    style={{ flex: 1, margin: 5 }}
+                  />
+                </Animated.View>
+              </TouchableOpacity>
             </View>
             <View style={{ width: 65, height: 50, alignItems: "center", justifyContent: "center" }}>
-              <Animated.View style={[styles.circle, { backgroundColor: "#58A850", height: this.state.circleAnimation, width: this.state.circleAnimation, alignItems: "center", justifyContent: "center" }]} >
-                <Image
-                  source={images.gps}
-                  resizeMode="contain"
-                  style={{ flex: 1, margin: 5, marginLeft: 8 }}
-                />
-              </Animated.View>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => {
+
+                  console.log("clicked")
+                  const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:' });
+                  const latLng = `${this.state.latitude},${this.state.longitude}`;
+                  const label = 'Qala Hayat';
+                  const url = Platform.select({
+                    ios: `${scheme}${label}@${latLng}`,
+                    android: `${scheme}${latLng}?q=${latLng}?(${label})`
+                  });
+                  Linking.openURL(url);
+                }}
+              >
+                <Animated.View style={[styles.circle, { backgroundColor: "#58A850", height: this.state.circleAnimation, width: this.state.circleAnimation, alignItems: "center", justifyContent: "center" }]} >
+                  <Image
+                    source={images.gps}
+                    resizeMode="contain"
+                    style={{ flex: 1, margin: 5, marginLeft: 8 }}
+                  />
+                </Animated.View>
+              </TouchableOpacity>
             </View>
 
             <View style={{ width: 65, height: 50, alignItems: "center", justifyContent: "center" }}>
               <TouchableOpacity
                 activeOpacity={0.8}
-                onPress={() => { () => Linking.openURL('mailto:' + this.state.email) }}
+                onPress={() => Linking.openURL('mailto:' + this.state.email)}
               >
 
                 <Animated.View style={[styles.circle, { backgroundColor: "#EEBD59", height: this.state.circleAnimation, width: this.state.circleAnimation, alignItems: "center" }]} >
@@ -183,10 +204,10 @@ export default class MapScreen extends Component {
               fontSize: constants.fonts.medium,
               textAlign: "left",
             }}>Azərbaycan, AZ1065, Bakı şəhəri Yasamal rayonu, İzmir küçəsi 5a</Text>
-            <Text style={{fontWeight:"bold"}}>iş-vaxti:  BE-CM: 9:00-18:00</Text>
-            <Text>telefon:   1540 | +(99412) 404-77-74</Text>
-            <Text>faks:       +(99412) 530-60-03</Text>
-            <Text>e-mail:    office@qala.az</Text>
+            <Text style={{ fontWeight: "bold" }}>İş-vaxtı:  BE-CM: 9:00-18:00</Text>
+            <Text>Telefon:   1540 | +(99412) 404-77-74</Text>
+            <Text>Faks:       +(99412) 530-60-03</Text>
+            <Text>E-mail:    office@qala.az</Text>
             <View style={styles.socialContainer}>
               <TouchableOpacity style={styles.socialButton} onPress={() => Linking.openURL('https://www.facebook.com/QalaHeyat/')}>
                 <Image source={images.socialFacebook} style={styles.social} />

@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
         flexDirection: "row"
     },
     circle: {
-        height: constants.ratio < 1.90 ? (constants.ratio < 1.6 ? moderateScale(20) : verticalScale(20)) : moderateScale(22),
-        width: constants.ratio < 1.90 ? (constants.ratio < 1.6 ? moderateScale(20) : verticalScale(20)) : moderateScale(22),
+        height: constants.ratio < 1.93 ? (constants.ratio < 1.6 ? moderateScale(18) : verticalScale(17)) : moderateScale(22),
+        width: constants.ratio < 1.93 ? (constants.ratio < 1.6 ? moderateScale(18) : verticalScale(17)) : moderateScale(22),
         backgroundColor: "white",
         borderRadius: 50,
         shadowColor: 'black',
@@ -55,8 +55,8 @@ const styles = StyleSheet.create({
         margin: moderateScale(3),
     },
     circleEmpty: {
-        height: constants.ratio < 1.90 ? (constants.ratio < 1.6 ? moderateScale(20) : verticalScale(20)) : moderateScale(22),
-        width: constants.ratio < 1.90 ? (constants.ratio < 1.6 ? moderateScale(20) : verticalScale(20)) : moderateScale(22),
+        height: constants.ratio < 1.93 ? (constants.ratio < 1.6 ? moderateScale(18) : verticalScale(17)) : moderateScale(22),
+        width: constants.ratio < 1.93 ? (constants.ratio < 1.6 ? moderateScale(18) : verticalScale(17)) : moderateScale(22),
         backgroundColor: "#414141",
         borderRadius: 50,
         margin: moderateScale(3),

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, ImageBackground, StatusBar, Image, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, View, ImageBackground, StatusBar, Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 import { Button, QalaInputText, CardView, Dialog, LoadingView } from '@component/views';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -29,8 +29,8 @@ export default class LoginScreen extends Component {
             asanModal: false,
             finTextInput: "",
             passwordTextInput: "",
-            phoneTextInput: "506562402",
-            asanIdTextInput: "240289",
+            phoneTextInput: "",
+            asanIdTextInput: "",
         }
 
         this.loginWithFin = this.loginWithFin.bind(this);
@@ -69,31 +69,43 @@ export default class LoginScreen extends Component {
     verifyAsan = async () => {
         if (this.state.timer === 1) {
             clearInterval(this.countdown);
-            this.setStateWithMount({
-                asanModal: false
-            })
+
             Snackbar.show({
                 text: "Sorğu üçün ayrılmış müddət bitdi.",
                 backgroundColor: '#de1623',
             });
+
+            this.setStateWithMount({
+                asanModal: false
+            })
+            console.log("asan_info_exit", "should exit now");
         } else {
             this.setStateWithMount({
                 timer: this.state.timer - 1
             });
 
-            const data = await api.asanValidate(this.state.asan.transaction_id);
+            let data = await api.asanValidate(this.state.asan.transaction_id);
+
+            console.log("asan_info_yes", data);
 
             if (data.status == "error") {
-                clearInterval(this.countdown);
+                console.log("should show error", data.message)
 
-                this.setStateWithMount({
+                this.setState({
                     asanModal: false
                 })
 
-                Snackbar.show({
-                    text: data.message,
-                    backgroundColor: '#de1623',
-                });
+
+
+                clearInterval(this.countdown);
+
+                setTimeout(() => {
+                    Snackbar.show({
+                        text: data.message,
+                        backgroundColor: '#de1623',
+                    });
+                }, 300)
+
             } else {
                 // if success get user from data
                 let user = data.data;
@@ -153,7 +165,6 @@ export default class LoginScreen extends Component {
                 } else {
                     // if success get user from data
                     let asan = data;
-
 
 
                     this.setStateWithMount({
@@ -235,7 +246,7 @@ export default class LoginScreen extends Component {
 
 
             <QalaInputText
-                placeholder="50XXXXXXX"
+                placeholder="XXXXXXX"
                 label="FIN"
                 autoCapitalize="characters"
                 onChangeText={text => this.setState({ finTextInput: text })}
@@ -265,7 +276,6 @@ export default class LoginScreen extends Component {
             />
 
             <Text style={{ width: "100%", textAlign: "center", marginTop: 10, color: "#414141aa", fontSize: constants.fonts.xxsmall }}>
-                I accept all <Text style={{ color: "black", fontWeight: "bold" }}>terms and conditions</Text>
             </Text>
 
         </View>)
@@ -357,7 +367,7 @@ export default class LoginScreen extends Component {
             />
 
             <Text style={{ width: "100%", textAlign: "center", marginTop: moderateScale(10), color: "#414141aa", fontSize: constants.fonts.xxsmall }}>
-                I accept all <Text style={{ color: "black", fontWeight: "bold" }}>terms and conditions</Text>
+
             </Text>
 
         </View>)
@@ -366,73 +376,82 @@ export default class LoginScreen extends Component {
 
     render() {
         return (
+
             <LoadingView
                 style={{ flex: 1 }}
                 showBlur={true}
                 isLoading={false}>
 
+                <KeyboardAvoidingView
+                    style={{ flex: 1 }}
+                    keyboardVerticalOffset="-150"
+                    behavior="position"
+                >
 
-                <ImageBackground
-                    source={images.newPinBackground}
-                    style={{ width: '100%', height: constants.screenHeight < 600 ? '100%' : "100%" }}>
-                    <StatusBar
-                        backgroundColor="white"
-                        barStyle="dark-content"
-                        translucent={true}
-                    />
-                    <View style={styles.container}>
-                        <Image
-                            source={images.logoSmall}
-                            style={styles.image}
-                            resizeMode="contain"
+                    <ImageBackground
+                        source={images.newPinBackground}
+                        style={{ width: '100%', height: constants.screenHeight < 600 ? '100%' : "100%" }}>
+                        <StatusBar
+                            backgroundColor="white"
+                            barStyle="dark-content"
+                            translucent={true}
                         />
-                    </View>
-                    <View style={{ flex: 2, padding: moderateScale(15), paddingTop: moderateScale(6) }}>
-                        <View style={{ flexDirection: "row" }}>
-                            <View style={{ alignItems: "center", justifyContent: "center", flex: 1, }}>
-                                <TouchableOpacity
-                                    activeOpacity={0.6}
-                                    onPress={() => { this.setState({ method: "fin" }) }}
-                                >
-                                    <View style={this.state.method === "fin" ? styles.tabSelected : styles.tab} >
-                                        <Image
-                                            style={{ width: verticalScale(20), height: verticalScale(20), tintColor: this.state.method === "fin" ? "white" : "#ffffffaa", }}
-                                            resizeMode="contain"
-                                            source={images.finid}
-                                        />
-                                        <Text style={this.state.method === "fin" ? styles.tabTextSelected : styles.tabText}>Fin kod</Text>
-                                    </View>
-                                </TouchableOpacity>
-                                <View style={[styles.triangle, { borderBottomColor: this.state.method === "fin" ? "white" : "transparent" }]}></View>
-                            </View>
-                            <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
-                                <TouchableOpacity
-                                    onPress={() => { this.setState({ method: "asanimza" }) }}
-                                    activeOpacity={0.6}
-                                >
-                                    <View style={this.state.method === "asanimza" ? styles.tabSelected : styles.tab}>
-                                        <Image
-                                            style={{ width: verticalScale(20), height: verticalScale(20), tintColor: this.state.method === "asanimza" ? "white" : "#ffffffaa" }}
-                                            resizeMode="contain"
-                                            source={images.asanimza}
-                                        />
-                                        <Text style={this.state.method === "asanimza" ? styles.tabTextSelected : styles.tabText}>Asan Imza</Text>
-                                    </View>
-                                </TouchableOpacity>
-                                <View style={[styles.triangle, { borderBottomColor: this.state.method === "asanimza" ? "white" : "transparent" }]}></View>
-                            </View>
+                        <View style={styles.container}>
+                            <Image
+                                source={images.logoSmall}
+                                style={styles.image}
+                                resizeMode="contain"
+                            />
                         </View>
-                        <CardView
-                            cornerRadius={10}
-                            cardElevation={4}
-                            style={styles.card}
-                        >
-                            {this.state.method === "fin" && this.renderFinForm()}
-                            {this.state.method === "asanimza" && this.renderAsanForm()}
-                        </CardView>
-                    </View>
-                </ImageBackground>
+                        <View style={{ flex: 2, padding: moderateScale(15), paddingTop: moderateScale(6) }}>
+                            <View style={{ flexDirection: "row" }}>
+                                <View style={{ alignItems: "center", justifyContent: "center", flex: 1, }}>
+                                    <TouchableOpacity
+                                        activeOpacity={0.6}
+                                        onPress={() => { this.setState({ method: "fin" }) }}
+                                    >
+                                        <View style={this.state.method === "fin" ? styles.tabSelected : styles.tab} >
+                                            <Image
+                                                style={{ width: verticalScale(20), height: verticalScale(20), tintColor: this.state.method === "fin" ? "white" : "#ffffffaa", }}
+                                                resizeMode="contain"
+                                                source={images.finid}
+                                            />
+                                            <Text style={this.state.method === "fin" ? styles.tabTextSelected : styles.tabText}>Fin kod</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    <View style={[styles.triangle, { borderBottomColor: this.state.method === "fin" ? "white" : "transparent" }]}></View>
+                                </View>
+                                <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
+                                    <TouchableOpacity
+                                        onPress={() => { this.setState({ method: "asanimza" }) }}
+                                        activeOpacity={0.6}
+                                    >
+                                        <View style={this.state.method === "asanimza" ? styles.tabSelected : styles.tab}>
+                                            <Image
+                                                style={{ width: verticalScale(20), height: verticalScale(20), tintColor: this.state.method === "asanimza" ? "white" : "#ffffffaa" }}
+                                                resizeMode="contain"
+                                                source={images.asanimza}
+                                            />
+                                            <Text style={this.state.method === "asanimza" ? styles.tabTextSelected : styles.tabText}>Asan Imza</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    <View style={[styles.triangle, { borderBottomColor: this.state.method === "asanimza" ? "white" : "transparent" }]}></View>
+                                </View>
+                            </View>
+                            <CardView
+                                cornerRadius={10}
+                                cardElevation={4}
+                                style={styles.card}
+                            >
+                                {this.state.method === "fin" && this.renderFinForm()}
+                                {this.state.method === "asanimza" && this.renderAsanForm()}
+                            </CardView>
+                        </View>
+                    </ImageBackground>
+                </KeyboardAvoidingView>
+
             </LoadingView>
+
 
         )
 

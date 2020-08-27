@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, SafeAreaView, StatusBar, Platform } from 'react-native'
+import { Text, StyleSheet, View, SafeAreaView, StatusBar, Platform, KeyboardAvoidingView } from 'react-native'
 import { Dialog, CardFlip, QalaInputText, LoadingView, StepIndicator, Button, ScrollViewCard, ModalPicker, CardView } from '@component/views';
 import { constants, colors } from '@config';
 import { moderateScale, verticalScale } from "react-native-size-matters"
@@ -96,6 +96,7 @@ export default class CapitalInsuranceScreen extends Component {
 
     sendRequest = async () => {
         const mobileRegex = /^(50|55|77|70|99|51)[2-9][0-9]{6}$/i
+        const emailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
         let isFormValid = true;
 
@@ -109,6 +110,16 @@ export default class CapitalInsuranceScreen extends Component {
             errors['phone'] = 'Mobil nömrə səhvdir.';
             isFormValid = false;
         }
+
+        
+        if (!fields['email']) {
+            errors['email'] = 'Zəhmət olmasa emailiniz qeyd edin.';
+            isFormValid = false;
+        }else if(!emailRegex.test(fields['email'])) {
+            errors['email'] = 'E-mail səhvdir.';
+            isFormValid = false;
+        }
+
 
         if (!fields['requestName']) {
             errors['requestName'] = 'Zəhmət olmasa Ad və Soyadınızı qeyd edin.';
@@ -386,6 +397,7 @@ export default class CapitalInsuranceScreen extends Component {
                         </ScrollViewCard>
 
                         <ScrollViewCard hideControl={true}>
+
                             {this.state.currentStep !== "request" &&
                                 <View style={{ flex: 1, padding: 20 }}>
                                     <Text style={styles.header}>Kalkulyator</Text>
@@ -520,6 +532,15 @@ export default class CapitalInsuranceScreen extends Component {
                                         maxLength={9}
                                         error={this.state.errors['phone']}
                                     />
+                                    <QalaInputText
+                                        label="E-mail"
+                                        editable={true}
+                                        value={this.state.fields['email']}
+                                        onChangeText={(text) => { this.onChangeField("email", text) }}
+                                        labelStyle={{ color: colors.primaryDark }}
+                                        style={styles.inputStyle}
+                                        error={this.state.errors['email']}
+                                    />
 
                                     <Text style={styles.belowText}>
                                         Aşağıda yerləşən "Sorğu Göndər" düyməsinə basıb öz müraciətinizi bizə göndərin
@@ -528,6 +549,7 @@ export default class CapitalInsuranceScreen extends Component {
 
                                 </View>
                             }
+
                         </ScrollViewCard>
 
                     </CardFlip>

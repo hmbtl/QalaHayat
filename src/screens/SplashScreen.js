@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { StyleSheet, SafeAreaView, Image, StatusBar, Platform } from 'react-native';
 import { images, colors, constants } from '@config';
 import AsyncStorage from '@react-native-community/async-storage';
-import { PermissionsAndroid } from 'react-native';
 import { verticalScale } from 'react-native-size-matters';
 
 export default class SplashScreen extends Component {
@@ -17,9 +16,11 @@ export default class SplashScreen extends Component {
       }
     } catch (e) {
       // error reading value
+      this.props.navigation.navigate('Pin');
     }
   };
 
+  /*
   requestCameraPermission = async () => {
     try {
       const granted = await PermissionsAndroid.request(
@@ -33,7 +34,7 @@ export default class SplashScreen extends Component {
           buttonNegative: 'İmtina',
           buttonPositive: 'OK',
         },
-      );
+      );  
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         console.log('You can use the camera');
         this.checkToken();
@@ -44,6 +45,7 @@ export default class SplashScreen extends Component {
       console.warn(err);
     }
   };
+  */
 
   render() {
     return (
@@ -70,11 +72,14 @@ export default class SplashScreen extends Component {
   }
   componentDidMount() {
 
-    if (Platform.OS === 'android') {
-      this.requestCameraPermission();
-    } else {
-      this.checkToken();
-    }
+    this.checkToken();
+    /*
+        if (Platform.OS === 'android') {
+          this.requestCameraPermission();
+        } else {
+          this.checkToken();
+        }
+        */
   }
 }
 

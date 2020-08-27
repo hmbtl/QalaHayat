@@ -87,6 +87,7 @@ export default class LifeBorrowerInsuranceScreen extends Component {
     }
 
     onPressStep = (step) => {
+        console.log(step)
         this.changeStep(this.state.currentStep, step);
     }
 
@@ -107,16 +108,18 @@ export default class LifeBorrowerInsuranceScreen extends Component {
     changeStep = (currentStep, nextStep) => {
         let flip = this.state.flip;
         if (currentStep !== nextStep) {
-            flip = true;
 
             let buttonText = this.state.buttonText;
 
             switch (nextStep) {
                 case "info":
                     buttonText = "Sorğuya keç"
+                    flip = false;
                     break;
                 case "request":
                     buttonText = "Sorğu göndər"
+                    flip = true;
+
                     break;
                 default:
                     break;

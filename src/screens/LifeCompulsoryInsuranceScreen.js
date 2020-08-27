@@ -84,7 +84,7 @@ export default class LifeCompulsoryInsuranceScreen extends Component {
                                 </Text>
 
                                 <Text style={styles.content}>
-                                    <Text style={styles.section}>İŞÇİLƏRİNİZİ İCBARI QAYDADA SIĞORTALAMAQLA ONLARIN VƏ AİLƏLƏRİNİN GƏLƏCƏYİNİ QORUMUŞ OLURSUNUZ!{'\n\n'}</Text>
+                                    <Text style={styles.section}>İŞÇİLƏRİNİZİ İCBARİ QAYDADA SIĞORTALAMAQLA ONLARIN VƏ AİLƏLƏRİNİN GƏLƏCƏYİNİ QORUMUŞ OLURSUNUZ!{'\n\n'}</Text>
                                 "İstehsalatda bədbəxt hadisələr və peşə xəstəlikləri nəticəsində peşə əmək qabiliyyətinin itirilməsi hallarından icbari sığorta haqqında" Qanun, Azərbaycan Respublikasında istehsalatda bədbəxt hadisələr və peşə xəstəlikləri nəticəsində peşə əmək qabiliyyətinin itirilməsi hallarından icbari sığorta sahəsində münasibətləri tənzimləyir, bu münasibətlərin hüquqi, iqtisadi və təşkilati əsaslarını müəyyən edir, başqa sözlə, sığorta olunanların həyatına və sağlamlığına dəyən zərər nəticəsində onların peşə əmək qabiliyyətinin itirilməsi və ya ölümü ilə bağlı sığorta ödənişinin verilməsini nəzərdə tutur.
                                 <Text style={styles.section}>{'\n\n'}BU NÖV ÜZRƏ AŞAĞIDAKI HALLARDA QEYD OLUNAN SIĞORTA TƏMİNATLARI NƏZƏRDƏ TUTULUB:{'\n\n'}</Text>
                                     {'\u2022 '}İstehsalatda bədbəxt hadisə və ya peşə xəstəliyi nəticəsində ölüm;{'\n'}
@@ -92,7 +92,7 @@ export default class LifeCompulsoryInsuranceScreen extends Component {
                                     <Text style={styles.section}>{'\n\n'}SIĞORTA TARİFİ:{'\n\n'}</Text>
                                 Peşə risk dərəcəsindən və sığorta olunanların kateqoriyalarından asılı olaraq sığorta tarifi aşağıdakı kimi müəyyən edilir:{'\n\n'}
                                     {'\u2022 '}Qulluqçular üçün (rəhbərlər, mütəxəssislər, texniki icraçılar) illik əmək haqqı fondunun 0.2-0.5%;{'\n'}
-                                    {'\u2022 '}Fəhlələr üçün illik əmək haqqı fondunun 0.4 - 2.0%;{'\n'}
+                                    {'\u2022 '}Fəhlələr üçün illik əmək haqqı fondunun 0.4 - 2.0%;{'\n\n'}
                                 Bu sığorta məhsulunun adından da məlum olduğu kimi mülkiyyət və təşkilati-hüquqi formasında asılı olmayaraq müəssisə, idarə və təşkilatlar, onların filial və nümayəndəlikləri, dövlət orqanları və digər qurumlar İcbari sığorta növü üzrə sığortalanmalıdır.{'\n\n'}
 
                                 Sığorta müqaviləsi bağlanmadığı təqdirdə sığorta hadisəsi baş verərsə işəgötürən öz işçisi qarşısında bu qanunla müəyyən edilmiş sığorta təminatı həcmində məsuliyyət daşıyacaq. Həmçinin, qanunvericiliklə nəzərdə tutulmuş məbləğdə cərimələnəcək.{'\n\n'}

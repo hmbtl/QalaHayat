@@ -112,6 +112,17 @@ export default class HarmlessInsuranceScreen extends Component {
             isFormValid = false;
         }
 
+
+        const emailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+        if (!fields['email']) {
+            errors['email'] = 'Zəhmət olmasa emailiniz qeyd edin.';
+            isFormValid = false;
+        }else if(!emailRegex.test(fields['email'])) {
+            errors['email'] = 'E-mail səhvdir.';
+            isFormValid = false;
+        }
+        
         if (!fields['requestName']) {
             errors['requestName'] = 'Zəhmət olmasa Ad və Soyadınızı qeyd edin.';
             isFormValid = false;
@@ -385,21 +396,60 @@ export default class HarmlessInsuranceScreen extends Component {
                                 </Text>
 
                                 <Text style={styles.content}>
-                                    <Text style={styles.section}>İŞÇİLƏRİNİZİ İCBARI QAYDADA SIĞORTALAMAQLA ONLARIN VƏ AİLƏLƏRİNİN GƏLƏCƏYİNİ QORUMUŞ OLURSUNUZ!{'\n\n'}</Text>
-                                "İstehsalatda bədbəxt hadisələr və peşə xəstəlikləri nəticəsində peşə əmək qabiliyyətinin itirilməsi hallarından icbari sığorta haqqında" Qanun, Azərbaycan Respublikasında istehsalatda bədbəxt hadisələr və peşə xəstəlikləri nəticəsində peşə əmək qabiliyyətinin itirilməsi hallarından icbari sığorta sahəsində münasibətləri tənzimləyir, bu münasibətlərin hüquqi, iqtisadi və təşkilati əsaslarını müəyyən edir, başqa sözlə, sığorta olunanların həyatına və sağlamlığına dəyən zərər nəticəsində onların peşə əmək qabiliyyətinin itirilməsi və ya ölümü ilə bağlı sığorta ödənişinin verilməsini nəzərdə tutur.
-                                <Text style={styles.section}>{'\n\n'}BU NÖV ÜZRƏ AŞAĞIDAKI HALLARDA QEYD OLUNAN SIĞORTA TƏMİNATLARI NƏZƏRDƏ TUTULUB:{'\n\n'}</Text>
-                                İstehsalatda bədbəxt hadisə və ya peşə xəstəliyi nəticəsində ölüm;
-                                İstehsalatda bədbəxt hadisə və ya peşə xəstəlikləri nəticəsində peşə əmək qabiliyyətinin daimi və ya tam itirilməsi.
-                                <Text style={styles.section}>{'\n\n'}SIĞORTA TARİFİ:{'\n\n'}</Text>
-                                Peşə risk dərəcəsindən və sığorta olunanların kateqoriyalarından asılı olaraq sığorta tarifi aşağıdakı kimi müəyyən edilir:
-                                Qulluqçular üçün (rəhbərlər, mütəxəssislər, texniki icraçılar) illik əmək haqqı fondunun 0.2-0.5%;
-                                Fəhlələr üçün illik əmək haqqı fondunun 0.4 - 2.0%;
-                                Bu sığorta məhsulunun adından da məlum olduğu kimi mülkiyyət və təşkilati-hüquqi formasında asılı olmayaraq müəssisə, idarə və təşkilatlar, onların filial və nümayəndəlikləri, dövlət orqanları və digər qurumlar İcbari sığorta növü üzrə sığortalanmalıdır.
+                                    “Qala Həyat” Sığorta Şirkəti olaraq Sizin üçün “Zərərsiz və İtkisiz” adlı yeni məhsul yaratdıq.
+                                    {'\n\n'}
+                                    Şərtlərimiz çox sadədədir:
+                                    {'\n\n'}
+                                    {'\u2022 '}Sizə uyğun olaraq, istədiyiniz və ödəyə biləcəyiniz sığorta haqqını özünüz təyin edirsiniz;
+                                    {'\n'}
+                                    {'\u2022 '}Biz isə Sizə həyatın ölüm halından və yaşam sığortası (sığorta müddəti ərzində heç bir hadisə baş vermədikdə belə sığorta ödənişi verilir) üzrə təminat veririk.
+                                    {'\n\n'}
+                                    <Text style={styles.section}>MƏHSULU NECƏ ƏLDƏ ETMƏK OLAR?{'\n\n'}</Text>
 
-                                Sığorta müqaviləsi bağlanmadığı təqdirdə sığorta hadisəsi baş verərsə işəgötürən öz işçisi qarşısında bu qanunla müəyyən edilmiş sığorta təminatı həcmində məsuliyyət daşıyacaq. Həmçinin, qanunvericiliklə nəzərdə tutulmuş məbləğdə cərimələnəcək.
+                                    {'\u2022 '}Onlayn kalkulyator vasitəsi ilə “A” və ya “B” paketlərindən özünüzə uyğun olanını seçirsiniz;
+                                    {'\u2022 '}Daha sonra onlayn müraciət göndərirsiniz.
+                                    {'\n\n'}
+                                    <Text style={styles.section}>MƏHSULU KİMLƏR ALA BİLƏR:{'\n\n'}</Text>
 
-                                Əlavə məlumat üçün 1540 qısa nömrəmizlə əlaqə saxlaya bilərsiniz.
-                            </Text>
+                                    {'\u2022 '}Əmək qabiliyyəti olan fiziki şəxslər.{'\n\n'}
+                                    <Text style={styles.section}>PAKETLƏR ÜZRƏ TƏMİNAT:{'\n\n'}</Text>
+
+                                    {'\u2022 '}Yaşam halı (sığorta müddəti ərzində heç bir hadisə baş vermədikdə sığorta ödənişi verilir);
+                                    {'\u2022 '}İstənilən səbəbdən ölüm halı (sığorta müddəti ərzində ölüm halında sığorta ödənişi verilir);
+                                    {'\n\n'}
+                                    <Text style={styles.section}>ŞƏRTLƏRİMİZ:{'\n\n'}</Text>
+
+                                    {'\u2022 '}Müqavilənin minimum müddəti: 1 il;
+                                    {'\u2022 '}Sığortalanın yaşı: 18-60 yaş;
+                                    {'\u2022 '}Sığortanın qüvvədə olduğu ərazi: Bütün dünya.
+                                    {'\n\n'}
+                                    <Text style={styles.section}>“A PAKETİ” ÜZRƏ:{'\n\n'}</Text>
+
+                                    {'\u2022 '}Sığorta məbləği: 500 AZN-dən başlayaraq;
+                                    {'\u2022 '}Sığorta haqqı: 150 AZN-dən başlayaraq.
+                                    {'\n\n'}
+                                    <Text style={styles.section}>“B PAKETİ” ÜZRƏ:{'\n\n'}</Text>
+
+                                    {'\u2022 '}Sığorta məbləği: 1000 AZN-dən başlayaraq;
+                                    {'\u2022 '}Sığorta haqqı: 150 AZN-dən başlayaraq.
+                                    {'\u2022 '}AŞAĞIDAKI HALLARDA SIĞORTA ÖDƏNİŞİ VERİLİR:
+                                    {'\n\n'}
+                                    <Text style={styles.section}>A PAKETİ:{'\n\n'}</Text>
+
+                                    {'\u2022 '}Ölüm halında: Sığorta məbləğinin 100%-i faydalanan şəxsə ödənilir;
+                                    {'\u2022 '}Yaşam halında sığorta haqqının 100%-i həcmində sığorta olunan və ya faydalanan şəxsə qaytarılır.
+                                    {'\n\n'}
+                                    <Text style={styles.section}>B PAKETİ:{'\n\n'}</Text>
+
+                                    {'\u2022 '}Ölüm riski üzrə: Sığorta məbləğinin 100%-i faydalanan şəxsə ödənilir;
+                                    {'\u2022 '}Yaşam halında sığorta haqqının 60%-i həcmində sığorta olunan və ya faydalanan şəxsə qaytarılır.
+                                    {'\n\n'}
+                                    <Text style={styles.section}>FAYDALANAN ŞƏXS:{'\n\n'}</Text>
+
+                                    {'\u2022 '}Sığorta olunanın müqavilədə qeyd etdiyi şəxs.
+                                    {'\n\n'}
+
+                                </Text>
                             </View>
                         </ScrollViewCard>
 
@@ -555,6 +605,17 @@ export default class HarmlessInsuranceScreen extends Component {
                                         maxLength={9}
                                         error={this.state.errors['phone']}
                                     />
+
+                                    <QalaInputText
+                                        label="E-mail"
+                                        editable={true}
+                                        value={this.state.fields['email']}
+                                        onChangeText={(text) => { this.onChangeField("email", text) }}
+                                        labelStyle={{ color: colors.primaryDark }}
+                                        style={styles.inputStyle}
+                                        error={this.state.errors['email']}
+                                    />
+
                                     <Text style={styles.belowText}>
                                         Aşağıda yerləşən "Sorğu Göndər" düyməsinə basıb öz müraciətinizi bizə göndərin
                                        </Text>

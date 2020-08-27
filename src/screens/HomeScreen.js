@@ -79,7 +79,7 @@ export default class HomeScreen extends Component {
 
             <View style={styles.cardRow}>
               <QalaProductButton
-                text="Online ödəniş"
+                text="Onlayn ödəniş"
                 onPress={() => this.props.navigation.navigate({ routeName: 'OnlinePayment' })}
                 icon={images.onlinePayment}
                 disabled={false}
