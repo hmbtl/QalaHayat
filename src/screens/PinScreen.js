@@ -309,7 +309,8 @@ export default class PinScreen extends Component {
 
                 <View style={styles.container}>
                     <Image
-                        source={images.logoSmall}
+                        //source={images.logoSmall}
+                        source={images.logoQarabag}
                         style={styles.image}
                         resizeMode="contain"
                     />

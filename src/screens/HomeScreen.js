@@ -7,7 +7,7 @@ import {
   Image,
   View,
 } from 'react-native';
-import { images} from '@config';
+import { images, colors } from '@config';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import { QalaProductButton } from '@component/layouts'
 
@@ -23,7 +23,7 @@ export default class HomeScreen extends Component {
             backgroundColor: 'transparent',
             paddingLeft: 15,
           }}>
-          <Image style={{ width: 35, height: 35, marginRight: 5 }} source={images.slider} />
+          <Image style={{ width: 35, height: 35, marginRight: 5, tintColor:"#414141" }}  source={images.slider} />
         </TouchableOpacity>
       ),
     };
@@ -32,8 +32,8 @@ export default class HomeScreen extends Component {
   render() {
     return (
       <ImageBackground
-        source={images.background}
-        style={{ width: '101%', height: '100%', backgroundColor: "white" }}>
+        source={images.backgroundWhite}
+        style={{ width: '100%', height: '100%', backgroundColor: colors.primaryLight }}>
         <StatusBar
           backgroundColor="transparent"
           barStyle="light-content"
@@ -41,7 +41,8 @@ export default class HomeScreen extends Component {
         />
         <View style={styles.container}>
           <Image
-            source={images.logoSmallWhite}
+            //source={images.logoSmallWhite}
+            source={images.logoQarabag}
             style={styles.image}
             resizeMode="contain"
           />

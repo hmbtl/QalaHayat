@@ -121,12 +121,14 @@ export default class ProductsScreen extends Component {
         return (
 
             <ImageBackground
-                source={images.newBackground}
-                style={{ width: '100%', height: '100%' }}>
+                //source={images.newBackground}
+                source={images.backgroundWhite}
+                style={{ width: '100%', height: '100%', backgroundColor: colors.primaryLight }}>
 
                 <View style={styles.container}>
                     <Image
-                        source={images.logoSmallWhite}
+                        // source={images.logoSmallWhite}
+                        source={images.logoQarabag}
                         style={styles.image}
                         resizeMode="contain"
                     />
