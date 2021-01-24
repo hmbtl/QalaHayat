@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { constants } from "@config"
 const API_URL = 'https://personal.qala.az/api';
 const LANG = "az";
-const HIDDEN_TOKEN = "s4925dXPsqnN3xkotbKK33greSCAQA6I";
+const HIDDEN_TOKEN = process.env.HIDDEN_TOKEN;
 
 
 const getToken = async () => {
